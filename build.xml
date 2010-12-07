@@ -1,0 +1,26 @@
+<project name="DefaceTool" basedir="." default="jar">
+
+    <property name="src.dir"     value="src"/>
+    <property name="dist.lib.dir"   value="lib"/>
+    <property name="classes.dir" value="bin"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+    <property name="main.class.name"  value="com.trustwave.deface.Deface"/>
+
+<path id="dist.classpath">
+    <fileset dir="${dist.lib.dir}" includes="**/*.jar" />
+</path>
+
+<manifestclasspath property="dist.manifest.classpath" jarfile="defacetool.jar">
+    <classpath refid="dist.classpath" />
+</manifestclasspath>
+ 
+<target name="jar">
+<jar destfile="defacetool.jar" basedir="${classes.dir}">
+    <manifest>
+        <attribute name="Main-Class" value="${main.class.name}" />
+        <attribute name="Class-Path" value="${dist.manifest.classpath}"/>   
+    </manifest>
+</jar>
+</target>
+    
+</project>
